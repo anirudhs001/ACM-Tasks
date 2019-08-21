@@ -5,7 +5,7 @@ def bubble_sort(list):
     #increment i from 1 till size - 1
     #i is started from 1 coz so j reaches max value (size - 2) so j+1 remains in bounds
     for i in range(1, size):
-        #increment j from 0 till size - i - 1 
+        #increment j from 0 till size - i - 1 ,i.e. size - 2, size - 3....
         for j in range(0, size - i):
             #check if current value greater than next
             #if yes, swap
