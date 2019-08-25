@@ -4,14 +4,19 @@ import numpy as np
 
 #for calculating the mean
 from statistics import mean
-#for graphing
+
 import matplotlib.pyplot as plt
+from matplotlib import style
+style.use('ggplot')
+
 
 #Find the Best Fit Slope
-def best_fit_slope(X, y):
+def best_fit_slope_n_const(X, y):
     m = (( (mean(X) * mean(y)) - mean(X * y)) /
          ( (mean(X)**2) - mean(X * X)))
-    return m
+
+    b = mean(y) - ( m * mean(X) )
+    return m, b
 
 
 ########################
@@ -42,10 +47,25 @@ y = np.array(list(map(float, y)))
 
 
 #get the best fit slope
-#m = best_fit_slope(X, y)
+m, b = best_fit_slope_n_const(X, y)
 
-#print the slope
-#print(m)
+#create the regression line using m and b
+regression_line = [(m*x)+b for x in X]
 
-plt.plot(X)
-plt.show()
+########################
+######OUTPUTTING########
+########################
+
+#print the slope and intercept
+print(f"slope:{m} and intercept:{b}")
+
+#now create the graph:
+  #Add the data points to the graph
+plt.scatter(X,y,color='#003F72',label='data')
+  #Add the regression line
+plt.plot(X, regression_line, label='regression line')
+  #Add the legend
+plt.legend(loc=4)
+
+#plot the graph. couldn't print it, so saving to file
+plt.savefig("graph.png")
